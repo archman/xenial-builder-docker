@@ -13,7 +13,7 @@ RUN apt-get update && \
         makeself && \
     rm -rf /var/lib/apt/lists/*
 
-COPY qt_5.15.2-1_all.deb linuxdeployqt-7-x86_64.AppImage /tmp/
+COPY qt_5.15.2-*_all.deb linuxdeployqt-7-x86_64.AppImage /tmp/
 RUN cd /tmp && dpkg -i /tmp/qt*.deb && \
     chmod +x linuxdeployqt-7-x86_64.AppImage && \
     ./linuxdeployqt-7-x86_64.AppImage --appimage-extract && \
