@@ -6,4 +6,5 @@ tonyzhang/xenial-builder:2.0, + gsl 2.6
 Example:
 VERSION=15.1.2 ./build_lise.sh --input lise_${VERSION}.tar.gz --src-version ${VERSION} --output pkg
 
-
+This container has been used in LISEcute repo at MSU gitlab site in the
+CI/CD section.
