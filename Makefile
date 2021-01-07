@@ -1,4 +1,4 @@
-IMAGE := tonyzhang/xenial-builder:1.0
+IMAGE := tonyzhang/xenial-builder:2.0
 VER := 15.1.8
 
 download:
