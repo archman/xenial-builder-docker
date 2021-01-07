@@ -20,7 +20,10 @@ RUN cd /tmp && dpkg -i /tmp/qt*.deb && \
     rm linuxdeployqt-7-x86_64.AppImage qt*.deb
 
 ADD https://ftp.wayne.edu/gnu/gsl/gsl-2.6.tar.gz /tmp/
-RUN tar xf /tmp/gsl-2.6.tar.gz -C /tmp && cd /tmp/gsl-2.6 && ./configure && make && make install && cd /tmp && rm -rf gsl-2.6*
+RUN tar xf /tmp/gsl-2.6.tar.gz -C /tmp && \
+    cd /tmp/gsl-2.6 && ./configure && make && make install && \
+    cd /tmp && rm -rf gsl-2.6* && \
+    echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf && ldconfig
 
 ADD entrypoint.sh /usr/bin/
 ENTRYPOINT ["entrypoint.sh"]
