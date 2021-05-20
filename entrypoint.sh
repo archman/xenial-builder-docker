@@ -6,6 +6,8 @@ MAKESELF_PATH=makeself
 MAKESELF_OPTS="--notemp --nox11"
 QMAKE=/usr/lib/qt-new/bin/qmake
 MAXNJOBS=$(cat /proc/cpuinfo | grep processor | wc -l)
+PRO_NAME="LISE_Package.pro"
+EXECS="LISE++ Charge Gemini PACE4 Global KanteleHandbook"
 
 njobs=''
 ver=''
@@ -33,34 +35,36 @@ if [[ -z ${njobs} || ${njobs} -gt ${MAXNJOBS} ]]; then
 fi
 
 cd /appbuilder
-[[ ! -e LISEcute.pro ]] && bash -i
+[[ ! -e ${PRO_NAME} ]] && bash -i
 
 # building
-${QMAKE} CONFIG+=release CONFIG+=optimize_full LISEcute.pro
+${QMAKE} CONFIG+=release CONFIG+=optimize_full ${PRO_NAME}
 make -j${njobs}
 
 # bundling
-
-mkdir lise-app
-cp -r LISE++ _install lise-app
-cd lise-app
+cp -r ${EXECS} _install
 rm $(find _install -iname '*.dll' -o -iname '*.exe' | xargs)
 find _install -empty -type d -delete
 
-${QT_DEPLOYER_PATH} LISE++ -qmake=${QMAKE} ${QT_DEPLOYER_OPTS}
-# find . -iname '*.so' -exec strip --strip-unneeded {} \;
-strip --strip-unneeded LISE++
+mv _install lise-app
+cd lise-app
+for app in ${EXECS}
+do
+    ${QT_DEPLOYER_PATH} ${app} -qmake=${QMAKE} ${QT_DEPLOYER_OPTS}
+    # find . -iname '*.so' -exec strip --strip-unneeded {} \;
+    strip --strip-unneeded ${app}
+done
 
 cat << EOF > run_lise.sh
 #!/bin/sh
 cwdir=\`dirname \$0\`
-\${cwdir}/LISE++ \${cwdir}/_install
+\${cwdir}/LISE++
 EOF
 chmod +x run_lise.sh
 
-cp _install/lisepp.ini _install/lisepp_original.ini
-sed -e '/^size/s/size=.*/size=11/;/^sound/s/sound=.*/sound=0/;/^3d/s/3d.*/3d-animation=0/;/^table/s/table=.*/table=-1/;s/^M$//' _install/lisepp_original.ini  > _install/lisepp.ini
-dos2unix _install/lisepp.ini
+cp lisepp.ini lisepp_original.ini
+sed -e '/^size/s/size=.*/size=11/;/^sound/s/sound=.*/sound=0/;/^3d/s/3d.*/3d-animation=0/;/^table/s/table=.*/table=-1/;s/^M$//' lisepp_original.ini  > lisepp.ini
+dos2unix lisepp.ini
 
 cd ..
 tar cjf /appbuilder/lise-app_${ver}.orig.tar.bz2 lise-app

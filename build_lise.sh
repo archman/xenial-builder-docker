@@ -10,7 +10,7 @@
 #                     --src-version <verion_number>
 #                     [--ouptut <output_dir>] [-j,--jobs <njobs>]
 #
-BLD_IMAGE="tonyzhang/xenial-builder:1.0"
+BLD_IMAGE="tonyzhang/xenial-builder:3.0"
 
 
 tmp_dir=$(mktemp -d -t XXXXXXXXXX)
@@ -110,7 +110,7 @@ msg "${GREEN}Decompress source tarball ${input_src_ver}${NOFORMAT}"
 tar xf ${input_src} -C $tmp_dir
 
 # source patching: modifinication before building
-sed -i '/^bool startFrom/s/.*/bool startFromFrameWork = true;/' $tmp_dir/w_Main/main.cpp
+# sed -i '/^bool startFrom/s/.*/bool startFromFrameWork = true;/' $tmp_dir/w_Main/main.cpp
 #
 
 msg "${GREEN}Start working...${NOFORMAT}"
