@@ -8,3 +8,6 @@ VERSION=15.1.2 ./build_lise.sh --input lise_${VERSION}.tar.gz --src-version ${VE
 
 This container has been used in LISEcute repo at MSU gitlab site in the
 CI/CD section.
+
+Starting version 16.16.20, Qt 6.5.2 is being used,
+and support Linux OSes released later than Ubuntu 20.04 (Focal), or glibc version >= 2.31
