@@ -1,4 +1,4 @@
-IMAGE := tonyzhang/xenial-builder:3.1
+IMAGE := tonyzhang/focal-builder:4.0
 VER := 15.1.8
 
 download:
