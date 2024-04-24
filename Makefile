@@ -1,4 +1,4 @@
-IMAGE := tonyzhang/focal-builder:4.0
+IMAGE := tonyzhang/focal-builder:5.2
 VER := 15.1.8
 
 download:
@@ -15,7 +15,7 @@ run:
 	docker run -it --rm $(IMAGE) --version 0.1
 
 push:
-	docker build --no-cache -t $(IMAGE) .
+	# docker build --no-cache -t $(IMAGE) .
 	docker push $(IMAGE)
 
 build-lise:

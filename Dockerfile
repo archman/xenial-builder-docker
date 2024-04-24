@@ -15,7 +15,7 @@ RUN apt-get update && \
         xz-utils makeself && \
     rm -rf /var/lib/apt/lists/*
 
-COPY qt_6.5.2-1_all.deb linuxdeployqt-continuous-x86_64.AppImage /tmp/
+COPY qt_6.7.0.2-1_all.deb linuxdeployqt-continuous-x86_64.AppImage /tmp/
 RUN cd /tmp && dpkg -i /tmp/qt*.deb && \
     chmod +x linuxdeployqt-continuous-x86_64.AppImage && \
     ./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract && \
