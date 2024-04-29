@@ -12,11 +12,12 @@ but still remains the repo name unchanged.
   - Qt Data Visualization
   - Qt Multimedia
   - Qt WebEngine
-- tonyzhang/focal-builder:5.2, Qt 6.7.0 with linuxdeployqt@2b38449, released 2023/12/27
+- tonyzhang/focal-builder:5.4, Qt 6.7.0 with linuxdeployqt@2b38449, released 2023/12/27
   - Qt Charts
   - Qt Data Visualization
   - Qt Multimedia
-  - Qt5 Compattibility Module
+  - Qt5 Compatibility Module
+  - Installed dependencies and fixed libqsqlmimer.so issue.
 ```
 
 Example:

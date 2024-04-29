@@ -1,4 +1,4 @@
-IMAGE := tonyzhang/focal-builder:5.2
+IMAGE := tonyzhang/focal-builder:5.4
 VER := 15.1.8
 
 download:
