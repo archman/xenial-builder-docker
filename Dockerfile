@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 LABEL maintainer="Tong Zhang <zhangt@frib.msu.edu>"
-LABEL version="5.3"
+LABEL version="5.4"
 
 WORKDIR /appbuilder
 
@@ -31,6 +31,9 @@ RUN tar xf /tmp/gsl-2.7.tar.gz -C /tmp && \
 
 RUN ln -s /tools/squashfs-root/AppRun /usr/local/bin/linuxdeployqt && \
     ln -s /usr/lib/qt-new/bin/qmake /usr/local/bin/
+
+# delete libqsqlmimer.so as it is missing deps which qt should have installed
+RUN find /usr/lib/qt-new -iname 'libqsqlmimer.so' -exec rm {} \;
 
 ADD entrypoint.sh /usr/bin/
 ENTRYPOINT ["entrypoint.sh"]
