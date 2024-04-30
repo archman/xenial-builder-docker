@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 LABEL maintainer="Tong Zhang <zhangt@frib.msu.edu>"
-LABEL version="5.4"
+LABEL version="5.4.1"
 
 WORKDIR /appbuilder
 
@@ -34,6 +34,9 @@ RUN ln -s /tools/squashfs-root/AppRun /usr/local/bin/linuxdeployqt && \
 
 # delete libqsqlmimer.so as it is missing deps which qt should have installed
 RUN find /usr/lib/qt-new -iname 'libqsqlmimer.so' -exec rm {} \;
+
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 ADD entrypoint.sh /usr/bin/
 ENTRYPOINT ["entrypoint.sh"]
